@@ -6,6 +6,10 @@ const sequelize = new Sequelize('Red_Social', 'root', 'LgSc06042004', {
   dialect: 'mysql',
 });
 
+const Usuario = require('./Models/usuarioModel');
+const Comentario = require('./Models/comentarioModel');
+const Comentario = require('./Models/comentarioModel');
+
 //Restricciones on Delete On Update 
 Usuario.hasMany(Comentario, { foreignKey: 'usuarioId' });
 Comentario.belongsTo(Usuario, { foreignKey: 'usuarioId' });
