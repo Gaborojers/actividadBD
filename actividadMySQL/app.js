@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize('Red_Social', 'root', 'LgSc06042004', {
