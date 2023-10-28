@@ -1,58 +1,34 @@
+const express = require('express');
 const mongoose = require('mongoose');
+const app = express();
+ 
+app.use(express.json());
 
-mongoose.connect('mongodb://localhost/tu_basedatos', { useNewUrlParser: true, useUnifiedTopology: true });
-
-const usuarioSchema = new mongoose.Schema({
-    nombre: String,
-    email: String,
-    publicaciones: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Publicacion'
-        }
-    ],
-    comentarios: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Comentario'
-        }
-    ]
+mongoose.connect('mongodb://localhost:27017/ActividadApi', {
+   useNewUrlParser: true,
+   useUnifiedTopology: true,
 });
 
-const Usuario = mongoose.model('Usuario', usuarioSchema);
+const connection = mongoose.connection;
 
-const publicacionSchema = new mongoose.Schema({
-    titulo: String,
-    contenido: String,
-    fechaCreacion: Date,
-    autor: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Usuario'
-    },
-    comentarios: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Comentario'
-        }
-    ]
+connection.once('open', () => {
+    console.log('Conexión a la BD exitosa...');
+ });
+ 
+ connection.on('error', (err) => {
+    console.log('Error en la conexión a la BD: ', err);
+ });
+
+ const comentarioRoutes = require("./Routes/comentarioRoutes");
+ const usuarioRoutes = require("./Routes/comentarioRoutes");
+ const publicacionRoutes = require("./Routes/publicacionRoutes");
+
+ app.use('/usuarios', usuarioRoutes);
+ app.use('/publicaciones', publicacionRoutes);
+ app.use('/comentarios', comentarioRoutes);
+
+ const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+   console.log(`Servidor en ejecución en el puerto ${PORT}`);
 });
-
-const Publicacion = mongoose.model('Publicacion', publicacionSchema);
-
-const comentarioSchema = new mongoose.Schema({
-    contenido: String,
-    fechaCreacion: Date,
-    autor: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Usuario'
-    },
-    publicacion: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Publicacion'
-    }
-});
-
-const Comentario = mongoose.model('Comentario', comentarioSchema);
-
-// Exporta los modelos
-module.exports = { Usuario, Publicacion, Comentario }; 
