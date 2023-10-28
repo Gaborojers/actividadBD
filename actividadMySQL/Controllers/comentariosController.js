@@ -1,7 +1,6 @@
-// Importar los modelos de usuario y comentarios
-const Usuario = require('./Models/usuarioModel');
-const Comentario = require('./Models/comentarioModel');
-const Comentario = require('./Models/comentarioModel');
+const Usuario = require('../Models/usuarioModel');
+const Comentario = require('../Models/comentarioModel');
+const Comentario = require('../Models/comentarioModel');
 
 const app = express();
 app.use(express.json());

@@ -7,8 +7,8 @@ const sequelize = new Sequelize('Red_Social', 'root', 'LgSc06042004', {
 });
 
 const Usuario = require('./Models/usuarioModel');
-const Comentario = require('./Models/comentarioModel');
-const Comentario = require('./Models/comentarioModel');
+const Comentario = require('./Models/comentariosModel');
+const Publicacion = require('./Models/publicacionModel');
 
 //Restricciones on Delete On Update 
 Usuario.hasMany(Comentario, { foreignKey: 'usuarioId' });
@@ -22,9 +22,9 @@ sequelize.sync({ force: true }).then(() => {
 });
 
 // Importa las rutas
-const publicacionRoutes = require('./routes/publicacionRoutes');
-const comentariosRoutes = require('./routes/comentariosRoutes');
-const usuarioRoutes = require('./routes/usuarioRoutes');
+const publicacionRoutes = require('./Routes/publicacionRoutes');
+const comentariosRoutes = require('./Routes/comentariosRoutes');
+const usuarioRoutes = require('./Routes/usuarioRoutes');
 
 // Agrega las rutas al servidor
 app.use('/usuarios', usuarioRoutes);

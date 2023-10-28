@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const comentariosController = require('../controllers/comentariosController');
+const comentariosController = require('../Controllers/comentariosController');
 
 // Rutas para Comentarios
 router.post('/comentarios/:publicacionId', comentariosController.create);

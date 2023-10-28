@@ -1,6 +1,4 @@
-const Usuario = require('./Models/usuarioModel');
-const Publicacion = require('./Models/publicacionModel');
-
+const Publicacion = require('../Models/publicacionModel');
 const app = express();
 app.use(express.json());
 
