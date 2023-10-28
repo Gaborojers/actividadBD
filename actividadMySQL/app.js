@@ -21,6 +21,9 @@ sequelize.sync({ force: true }).then(() => {
     console.error('Error al crear la base de datos y tablas:', err);
 });
 
+const app = express(); 
+app.use(express.json());
+
 // Importa las rutas
 const publicacionRoutes = require('./Routes/publicacionRoutes');
 const comentariosRoutes = require('./Routes/comentariosRoutes');
