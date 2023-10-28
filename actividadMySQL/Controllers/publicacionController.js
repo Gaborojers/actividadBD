@@ -1,4 +1,5 @@
 const Publicacion = require('../Models/publicacionModel');
+
 const app = express();
 app.use(express.json());
 
